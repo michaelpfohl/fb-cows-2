@@ -3,12 +3,14 @@ import 'firebase/auth';
 import userData from './farmerData';
 import auth from '../../components/auth/auth';
 import myNavbar from '../../components/myNavbar/myNavbar';
+import viewHelper from '../viewHelper';
 
 const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((farmer) => {
     if (farmer) {
       const currentFarmer = userData.setCurrentFarmer(farmer);
       myNavbar.myNavbar(currentFarmer);
+      viewHelper.viewListener('cows-link');
     } else {
       auth.loginButton();
       $('#nav').html('');
